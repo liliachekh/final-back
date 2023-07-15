@@ -1,10 +1,14 @@
 const express = require('express');
-const cors=require("cors");
-
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const path = require('path');
+const cors =require('cors');
+// const corsOptions = {
+//   origin:'*',
+//   credentials:true,
+//   optionSuccessStatus:200,
+// }
 require('dotenv').config();
 
 const globalConfigs = require('./routes/globalConfigs');
@@ -25,12 +29,13 @@ const comments = require('./routes/comments');
 const shippingMethods = require('./routes/shippingMethods');
 const paymentMethods = require('./routes/paymentMethods');
 const partners = require('./routes/partners');
-// const mainRoute = require('./routes/index');
+const { log } = require('console');
+const mainRoute = require('./routes/index');
 
 const app = express();
-app.use(cors())
 
 // Body parser middleware
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -76,10 +81,11 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 
   app.get('*', (req, res) => {
+    console.log(res.body)
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || "4000";
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
