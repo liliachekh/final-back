@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js",
-    "builds": "nodemon index.js"
+    "builds": "nodemon index.js",
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -32,7 +32,7 @@
     "passport-jwt": "^4.0.0",
     "unique-random": "^2.1.0",
     "validator": "^13.9.0",
-    "vercel": "^31.0.3"
+    "vercel": "^31.0.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"
