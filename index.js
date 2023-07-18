@@ -31,6 +31,7 @@ const paymentMethods = require('./routes/paymentMethods');
 const partners = require('./routes/partners');
 const { log } = require('console');
 const mainRoute = require('./routes/index');
+const { getStaticFilesPath } = require("./utils");
 
 const app = express();
 
@@ -85,6 +86,7 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
+app.use(express.static(getStaticFilesPath()));
 
 const port = process.env.PORT || "4000";
 

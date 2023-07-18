@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require("passport");
 const multer = require("multer"); // multer for parsing multipart form data (files)
 const fse = require("fs-extra");
+const { getUploadedImagesPath } = require("../utils");
 
 //Import controllers
 const {
@@ -19,9 +20,9 @@ const {
 const storage = multer.diskStorage({
   // Destination, where files should be stored (image url)
   destination: function(req, file, cb) {
-    var newDestination = req.headers.path; // We sen image url in header ("path"), when making axios request
-    fse.mkdirsSync(newDestination); // We creating folder in destination, specified in headers "path"
-    cb(null, newDestination); // Saving file
+    //var newDestination = req.headers.path; // We sen image url in header ("path"), when making axios request
+    //fse.mkdirsSync(newDestination); // We creating folder in destination, specified in headers "path"
+    cb(null, getUploadedImagesPath()); ; // Saving file
   },
 
   filename: function(req, file, cb) {
@@ -98,5 +99,7 @@ router.post("/search", searchProducts);
 // @desc    GET existing product by id
 // @access  Public
 router.get("/:itemNo", getProductById);
+
+// router.get("/:itemNo", getImage)
 
 module.exports = router;
